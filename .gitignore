@@ -16,3 +16,16 @@ env.*
 # IPython
 profile_default/
 ipython_config.py
+
+# TO-DO
+todo.txt
+
+# Data Directory
+data/
+
+# Scripts Directory
+scripts/
+
+# Notebooks Directory
+notebooks/
+test/
