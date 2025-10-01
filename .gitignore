@@ -26,3 +26,6 @@ data/
 # Notebooks Directory
 notebooks/
 
+# Postgres
+pgdb/
+

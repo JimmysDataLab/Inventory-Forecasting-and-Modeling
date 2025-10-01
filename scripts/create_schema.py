@@ -3,41 +3,46 @@ Creates a json schema file from hard coded dictionary
 '''
 import os
 import json
+import shutil
+from pathlib import Path
+from dotenv import load_dotenv
 
-data_dir = os.getenv("SSTSF_DATA_DIR")
 
-csv_read_schema = {os.path.join(data_dir,"raw","test.csv"):{ \
-        "id":"category",
+load_dotenv()
+data_dir = os.getenv("DATA_DIR")
+
+csv_read_schema = {"test" :{ \
+        "id":"Int64",
         "date":"string",
         "store_nbr":"category",
         "family":"category",
         "onpromotion":"category"},
 
-        os.path.join(data_dir,"raw","train.csv"): { \
-            "id":"category",
+        "train.csv" : { \
+            "id":"Int64",
             "date":	"string",
             "store_nbr":"category",
             "family":"category",
             "onpromotion":"category"},
 
-        os.path.join(data_dir,"raw","transactions.csv"): { \
+        "transactions" : { \
             "date":"string",
             "store_nbr":"category",
             "transactions":"Int64"},
 
-        os.path.join(data_dir,"raw","oil.csv"): { \
+        "oil" : { \
             "date":"string",
             "dcoilwtico":"Float64"},
 
-        os.path.join(data_dir,"raw","holidays_events.csv"): { \
+        "holidays_events" : { \
             "date":"string",
-            "type":"category",	
+            "type":"category",
             "locale":"category",
             "locale_name":"category",
             "description":"category",
             "transferred":"boolean"},
 
-        os.path.join(data_dir,"raw","stores.csv"): { \
+        "stores" : { \
             "store_nbr":"category",
             "city":"category",
             "state":"category",
@@ -45,20 +50,32 @@ csv_read_schema = {os.path.join(data_dir,"raw","test.csv"):{ \
             "cluster":"category"},
 }
 
-csv_date_schema = {os.path.join(data_dir,"raw","test.csv"):["date"],
-    os.path.join(data_dir,"raw","train.csv"):["date"],
-    os.path.join(data_dir,"raw","transactions.csv"):["date"],
-    os.path.join(data_dir,"raw","oil.csv"):["date"],
-    os.path.join(data_dir,"raw","holidays_events.csv"):["date"]
+csv_date_schema = {"test":["date"],
+    "train":["date"],
+    "transactions" :["date"],
+    "oil" :["date"],
+    "holidays_events" :["date"]
 }
 
-os.makedirs(os.path.join(data_dir,"schema"),exist_ok=True)
+def main():
 
-with open(os.path.join(data_dir,"schema","csv_read_schema.json"),"w",encoding="UTF-8") as file:
-    file.write(json.dumps(csv_read_schema,indent=4))
+    if os.path.exists(os.path.join(data_dir,"schema")):
+        print("Removing existing schema directory\n")
+        shutil.rmtree(os.path.join(data_dir,"schema"))
 
-with open(os.path.join(data_dir,"schema","csv_date_schema.json"),"w",encoding="UTF-8") as file:
-    file.write(json.dumps(csv_date_schema,indent=4))
+    print("Creating new schema directory\n")
+    os.makedirs(os.path.join(data_dir,"schema"),exist_ok=True)
 
-print("schemas created\n")
-print(os.listdir(os.path.join(data_dir,"schema")))
+    with open(os.path.join(data_dir,"schema","csv_read_schema.json"),"w",encoding="UTF-8") as file:
+        file.write(json.dumps(csv_read_schema,indent=4))
+
+    with open(os.path.join(data_dir,"schema","csv_date_schema.json"),"w",encoding="UTF-8") as file:
+        file.write(json.dumps(csv_date_schema,indent=4))
+
+    print("schemas created:\n")
+    for schema in Path(os.path.join(data_dir,"schema")).rglob("*.json"):
+        print(schema.relative_to(Path.home()),"\n")
+
+if __name__=="__main__":
+    main()
+
