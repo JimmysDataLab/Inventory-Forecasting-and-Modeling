@@ -1,6 +1,9 @@
 # MacOS
 .DS_Store
 
+# System
+.vscode
+
 # Jupyter notebook checkpoints
 .ipynb_checkpoints
 
@@ -11,7 +14,8 @@ __pycache__/
 
 # Environments
 .env
-env.*
+# env.* 
+#*.yaml
 
 # IPython
 profile_default/
@@ -24,7 +28,7 @@ todo.txt
 data/
 
 # Notebooks Directory
-notebooks/
+#notebooks/
 
 # Postgres
 pgdb/
