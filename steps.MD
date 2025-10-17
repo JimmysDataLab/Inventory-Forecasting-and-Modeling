@@ -1,0 +1,1 @@
+conda create --name store-sales-time-series-forecasting 
