@@ -7,3 +7,4 @@ conda create --name store-sales-time-series-forecasting
 pip install kaggle
 
 kaggle competitions download -c m5-forecasting-uncertainty
+Deepak was here
