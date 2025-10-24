@@ -8,4 +8,5 @@ pip install kaggle
 
 cd to data/
 kaggle competitions download -c m5-forecasting-uncertainty
-Akhil was here
+unzip -q m5-forecasting-accuracy.zip -d ./m5-forecasting-accuracy/
+Adwaith was here
