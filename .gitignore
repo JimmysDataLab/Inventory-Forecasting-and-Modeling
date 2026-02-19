@@ -23,9 +23,9 @@ ipython_config.py
 
 # TO-DO
 todo.txt
-
+*.MD
 # Data Directory
-data/
+/data/
 
 # Notebooks Directory
 #notebooks/
