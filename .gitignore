@@ -13,7 +13,7 @@ __pycache__/
 *$py.class
 
 # Environments
-.env
+#.env
 # env.* 
 #*.yaml
 
@@ -26,6 +26,9 @@ todo.txt
 
 # Data Directory
 data/
+
+# Tableau extracts (kept for clarity if data/ scope changes)
+data/tableau/
 
 # Notebooks Directory
 #notebooks/
